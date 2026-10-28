@@ -1,0 +1,15 @@
+---
+import Base from '../../layouts/Base.astro';
+import Arrow from '../../components/Arrow.astro';
+import { areas } from '../../data/areas';
+import { site } from '../../data/site';
+export function getStaticPaths() { return areas.map(area => ({ params: { slug: area.slug }, props: { area } })); }
+const { area } = Astro.props;
+const others = areas.filter(item => item.slug !== area.slug);
+---
+<Base title={`${area.name} — ${site.name}`} description={area.intro}>
+  <section class="area-hero section-shell" id="inicio"><a class="area-back text-link" href="/#atuacao"><span aria-hidden="true">←</span> Todas as áreas</a><span class="eyebrow">ÁREA DE ATUAÇÃO · {site.areasNote}</span><h1>{area.name}<span class="area-title-dot">.</span></h1><div class="area-intro"><span class="area-page-numeral" aria-hidden="true">{area.numeral}</span><p>{area.intro}</p></div></section>
+  <section class="area-details section-shell"><h2>Entender para<br/><em>decidir.</em></h2><div><p>{area.description}</p><h3>Questões que podem ser orientadas</h3><ul>{area.situations.map(text => <li>{text}<Arrow /></li>)}</ul><p class="area-note">{area.note}</p></div></section>
+  <section class="area-contact section-shell" id="contato"><span class="eyebrow">CADA HISTÓRIA É ÚNICA.</span><h2>Vamos entender<br/><em>a sua.</em></h2><p>O primeiro contato é o espaço para conhecer a sua situação e orientar os próximos passos.</p><a class="button button-paper" href="/#contato">Agendar conversa <Arrow /></a><small>{site.whatsapp} · {site.email}</small></section>
+  <section class="related-areas section-shell"><h2>Outros caminhos<br/><em>de atuação.</em></h2><nav aria-label="Outras áreas">{others.map(item => <a href={`/atuacao/${item.slug}/`}><span>{item.numeral}</span>{item.name}<Arrow /></a>)}</nav></section>
+</Base>

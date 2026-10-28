@@ -1,0 +1,12 @@
+---
+import Logo from './Logo.astro';
+import Arrow from './Arrow.astro';
+---
+<a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+<header class="site-header">
+  <a class="home-link" href="/" aria-label="GD Gabriela Dias Advocacia — início"><Logo decorative /><span>GABRIELA DIAS<br/><small>ADVOCACIA</small></span></a>
+  <button class="menu-toggle" aria-expanded="false" aria-controls="main-nav" type="button"><span>Menu</span><span class="menu-icon" aria-hidden="true"><i></i><i></i></span></button>
+  <nav id="main-nav" aria-label="Navegação principal">
+    <a href="/#atuacao">Atuação</a><a href="/#sobre">A advogada</a><a href="/#como-funciona">Como funciona</a><a class="nav-contact" href="/#contato">Vamos conversar <Arrow /></a>
+  </nav>
+</header>

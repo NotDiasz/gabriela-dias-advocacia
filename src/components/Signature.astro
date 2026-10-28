@@ -1,0 +1,25 @@
+---
+import { assinatura } from '../data/assinatura';
+interface Props { class?: string; label?: boolean; pen?: boolean; }
+const { class: className = '', label = true, pen = false } = Astro.props;
+// Each glyph is revealed through its own mask, so ids must be unique per instance.
+const uid = `sig-${Math.random().toString(36).slice(2, 8)}`;
+---
+<div class:list={['signature', className]}>
+  <svg viewBox={assinatura.viewBox} role="img" aria-label="Gabriela Dias" class="signature-svg">
+    <defs>
+      {assinatura.paths.map((path, index) => (
+        <mask id={`${uid}-${index}`}>
+          <path class="signature-pen" d={path.d} pathLength="1" />
+        </mask>
+      ))}
+    </defs>
+    <g class="signature-letters">
+      {assinatura.paths.map((path, index) => <path class="signature-glyph" d={path.d} mask={`url(#${uid}-${index})`} />)}
+    </g>
+    <path class="signature-dot" d={assinatura.dot} />
+    {pen && <circle class="signature-nib" r="3.2" cx="0" cy="0" />}
+    {pen && [0, 1].map(() => <circle class="signature-ripple" r="1" cx="0" cy="0" />)}
+  </svg>
+  {label && <span class="signature-label">ADVOCACIA</span>}
+</div>

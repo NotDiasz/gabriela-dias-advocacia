@@ -1,0 +1,11 @@
+---
+import fs from 'node:fs';
+import path from 'node:path';
+import { Image } from 'astro:assets';
+interface Props { src: string; alt: string; class?: string; eager?: boolean; width?: number; height?: number; }
+const { src, alt, class: className = '', eager = false, width = 1200, height = 1500 } = Astro.props;
+const exists = fs.existsSync(path.join(process.cwd(), 'public', src));
+---
+<div class:list={['media', className, { 'media-placeholder': !exists }]} data-media={src}>
+  {exists ? <Image src={src} alt={alt} width={width} height={height} loading={eager ? 'eager' : 'lazy'} decoding="async" /> : <span class="sr-only" role="img" aria-label={alt + ' — imagem em preparação'}></span>}
+</div>

@@ -1,0 +1,17 @@
+---
+import { areas } from '../data/areas';
+import Arrow from './Arrow.astro';
+---
+<div class="areas-carousel">
+  <div class="areas-stage" aria-label="Quatro áreas de atuação" tabindex="0">
+    <div class="areas-cylinder">
+      {areas.map((area, index) => <article class:list={['area-card', `area-card-${index}`]} aria-label={`${index + 1} de 4: ${area.name}`}>
+        <div class="card-topline eyebrow"><span>ÁREA DE ATUAÇÃO</span><span>0{index + 1}</span></div>
+        <span class="area-numeral" aria-hidden="true">{area.numeral}</span>
+        <h3>{area.name}</h3><ul>{area.situations.map(text => <li>{text}</li>)}</ul>
+        <a class="card-link" href={`/atuacao/${area.slug}/`}>Conhecer a área <Arrow /></a>
+      </article>)}
+    </div>
+  </div>
+  <div class="carousel-controls"><span class="carousel-counter"><span data-area-count>01</span><span class="counter-line"></span><span>/ 04</span></span><span class="carousel-help">Role para explorar</span><div class="carousel-buttons"><button type="button" data-area-prev aria-label="Área anterior"><Arrow /></button><button type="button" data-area-next aria-label="Próxima área"><Arrow /></button></div></div>
+</div>

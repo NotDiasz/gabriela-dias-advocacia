@@ -1,0 +1,19 @@
+---
+import fs from 'node:fs';
+import { randomUUID } from 'node:crypto';
+interface Props { class?: string; variant?: 'monogram' | 'lockup'; decorative?: boolean; }
+const { class: className, variant = 'monogram', decorative = false } = Astro.props;
+const files = { monogram: 'brand/logo/monograma-cafe-marfim.svg', lockup: 'brand/logo/lockup-cafe-marfim.svg' };
+let svg = fs.existsSync(files[variant]) ? fs.readFileSync(files[variant], 'utf8').replace(/<\?xml[^>]*\?>/g, '') : undefined;
+if (svg) {
+  const prefix = `gd-${randomUUID().slice(0, 8)}-`;
+  const ids = new Map([...svg.matchAll(/\bid="([^"]+)"/g)].map(match => [match[1], prefix + match[1]]));
+  svg = svg.replace(/\bid="([^"]+)"/g, (_, id) => `id="${ids.get(id)}"`)
+    .replace(/url\(#([^)]+)\)/g, (_, id) => `url(#${ids.get(id) ?? id})`)
+    .replace(/\baria-labelledby="([^"]+)"/g, (_, value) => `aria-labelledby="${value.split(' ').map((id: string) => ids.get(id) ?? id).join(' ')}"`)
+    .replace('<svg ', '<svg aria-hidden="true" focusable="false" ');
+}
+---
+<span class:list={['logo', className, { 'logo-official': !!svg }]} role={decorative ? undefined : 'img'} aria-hidden={decorative ? 'true' : undefined} aria-label={decorative ? undefined : 'Gabriela Dias Advocacia'}>
+  {svg ? <Fragment set:html={svg}/> : <span aria-hidden="true">GD<span class="logo-dot"></span></span>}
+</span>

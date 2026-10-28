@@ -1,0 +1,13 @@
+---
+import Signature from './Signature.astro';
+import Logo from './Logo.astro';
+import { site } from '../data/site';
+import { areas } from '../data/areas';
+---
+<div class="footer-reveal">
+  <footer class="site-footer" id="rodape">
+    <div class="footer-top"><Logo /><span class="eyebrow">Presença, cuidado e clareza.</span><a class="back-top" href="#inicio">Voltar ao início <span aria-hidden="true">↑</span></a></div>
+    <Signature class="footer-signature" />
+    <div class="footer-bottom"><span>© {site.year} Gabriela Dias<br/>{site.oab}</span><nav aria-label="Áreas de atuação">{areas.map(area => <a href={`/atuacao/${area.slug}`}>{area.name}</a>)}</nav><span>{site.city}<br/>Conteúdo informativo.</span></div>
+  </footer>
+</div>

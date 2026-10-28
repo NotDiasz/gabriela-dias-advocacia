@@ -1,0 +1,49 @@
+---
+import { ClientRouter } from 'astro:transitions';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { site } from '../data/site';
+import '@fontsource/cormorant-garamond/latin-300.css';
+import '@fontsource/cormorant-garamond/latin-400.css';
+import '@fontsource/cormorant-garamond/latin-500.css';
+import '@fontsource/cormorant-garamond/latin-400-italic.css';
+import '@fontsource/cinzel/latin-400.css';
+import '@fontsource/cinzel/latin-500.css';
+import '@fontsource/jost/latin-400.css';
+import '@fontsource/jost/latin-500.css';
+import '@fontsource/monsieur-la-doulaise/latin-400.css';
+import '../styles/global.css';
+import displayFont from '@fontsource/cormorant-garamond/files/cormorant-garamond-latin-400-normal.woff2?url';
+import bodyFont from '@fontsource/jost/files/jost-latin-400-normal.woff2?url';
+interface Props { title?: string; description?: string; home?: boolean; }
+const { title = site.title, description = site.description, home = false } = Astro.props;
+const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site).href : undefined;
+const structured = { '@context': 'https://schema.org', '@type': 'Attorney', name: site.name, description, ...(canonical ? { url: canonical } : {}) };
+---
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>{title}</title><meta name="description" content={description}/><meta name="theme-color" content="#F4EEE6"/>
+    <meta property="og:type" content="website"/><meta property="og:locale" content="pt_BR"/><meta property="og:title" content={title}/><meta property="og:description" content={description}/>
+    {canonical && <><link rel="canonical" href={canonical}/><meta property="og:url" content={canonical}/></>}
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+    <link rel="preload" href={displayFont} as="font" type="font/woff2" crossorigin/>
+    <link rel="preload" href={bodyFont} as="font" type="font/woff2" crossorigin/>
+    <script type="application/ld+json" set:html={JSON.stringify(structured).replace(/</g, '\\u003c')}/>
+    <script is:inline data-astro-rerun>
+      (function () {
+        var root = document.documentElement;
+        root.classList.add('js');
+        if (!matchMedia('(prefers-reduced-motion: reduce)').matches) root.classList.add('motion');
+        if (window.__gdIntroPlayed) root.classList.add('intro-vista');
+      })();
+    </script>
+    <ClientRouter />
+  </head>
+  <body data-home={home ? 'true' : 'false'}>
+    <Header /><main id="conteudo" tabindex="-1"><slot /></main><Footer />
+    <div class="page-curtain" aria-hidden="true"></div>
+    <script>import '../scripts/motion/index';</script>
+  </body>
+</html>

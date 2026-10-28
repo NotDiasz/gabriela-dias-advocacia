@@ -1,0 +1,113 @@
+---
+import fs from 'node:fs';
+import Base from '../layouts/Base.astro';
+import Signature from '../components/Signature.astro';
+import Media from '../components/Media.astro';
+import Arrow from '../components/Arrow.astro';
+import AreasCarousel from '../components/AreasCarousel.astro';
+import SignetRing from '../components/SignetRing';
+import Logo from '../components/Logo.astro';
+import sealMonogram from '../../brand/logo/monograma-champagne-bordo.svg?raw';
+import { site, steps, numbers, commitments, questions, testimonials } from '../data/site';
+const ringAvailable = fs.existsSync('public/media/objetos/anel.webp');
+---
+<Base home>
+  <div class="intro" data-intro role="dialog" aria-modal="true" aria-label="Apresentação de Gabriela Dias">
+    <div class="intro-gate" aria-hidden="true">
+      <span class="intro-seal"><span class="intro-seal-mark" set:html={sealMonogram} /></span>
+    </div>
+    <div class="intro-center"><Signature class="intro-signature" pen /><span class="intro-note eyebrow">A sua história merece atenção.</span></div>
+    <button class="intro-skip" type="button" data-intro-skip>Pular apresentação <Arrow /></button>
+  </div>
+  <section class="hero" id="inicio" aria-labelledby="hero-title">
+    <h1 class="sr-only" id="hero-title">Gabriela Dias Advocacia</h1>
+    <div class="hero-note eyebrow">O direito começa<br/>com uma boa escuta.</div>
+    <div class="hero-composition">
+      <span class="hero-dias" aria-hidden="true">Dias</span>
+      <div class="hero-portrait-wrap"><Media src="/media/gabriela-recorte.webp" alt="Gabriela Dias, advogada" class="hero-portrait" eager /><span class="cameo-outline" aria-hidden="true"></span></div>
+      <svg class="hero-arc" viewBox="0 0 760 340" role="img" aria-label="Gabriela"><defs><path id="name-arc" d="M 90 300 A 290 265 0 0 1 670 300" /></defs><text><textPath href="#name-arc" startOffset="50%" text-anchor="middle"><tspan class="arc-syllable">GA</tspan><tspan class="arc-syllable"> · </tspan><tspan class="arc-syllable">BRI</tspan><tspan class="arc-syllable"> · </tspan><tspan class="arc-syllable">E</tspan><tspan class="arc-syllable"> · </tspan><tspan class="arc-syllable">LA</tspan></textPath></text></svg>
+    </div>
+    <div class="hero-bottom"><span class="eyebrow hero-areas">{site.areasLabel}</span><a class="button" href="#contato">Agendar conversa <Arrow /></a></div>
+    <a class="scroll-cue eyebrow" href="#escuta"><span class="guide-dot"></span>Desça para conhecer<span aria-hidden="true">↓</span></a>
+    <span class="hero-location eyebrow">{site.city}</span>
+  </section>
+
+  <section class="manifesto manifesto-one" id="escuta" aria-labelledby="escuta-title">
+    <span class="section-index eyebrow">(01) — O MÉTODO</span>
+    <div class="manifesto-copy"><h2 id="escuta-title">Escuta<br/><em>atenta<span class="manifesto-period" aria-hidden="true">.</span></em></h2><p class="manifesto-lines">Antes de qualquer estratégia, entender a sua história: o que aconteceu, o que preocupa, o que você precisa.</p><span class="bracket-label">[ O MÉTODO ]</span></div>
+    <div class="manifesto-object ink-object"><Media src="/media/objetos/tinteiro.webp" alt="Tinteiro de vidro com detalhes em metal champagne" width={1200} height={1200}/></div>
+    <span class="ink-drop guide-dot" aria-hidden="true"></span><span class="manifesto-side eyebrow">Cada história tem o seu tempo.</span>
+  </section>
+
+  <section class="manifesto manifesto-two" id="clareza" aria-labelledby="clareza-title">
+    <div class="clarity-content"><span class="section-index eyebrow">(02) — O COMPROMISSO</span><div class="manifesto-copy"><h2 id="clareza-title">Clareza em<br/><em>cada passo<span class="clarity-period">.</span></em></h2><p class="clarity-words">Você sabe o que está acontecendo no seu caso, em linguagem simples, do primeiro contato à última decisão.</p><span class="bracket-label">[ O COMPROMISSO ]</span></div><div class="manifesto-object key-object"><Media src="/media/objetos/chave.webp" alt="Chave em metal champagne" width={1200} height={1200}/></div></div>
+  </section>
+
+  <section class="brand-section" id="marca" aria-labelledby="brand-title">
+    <h2 id="brand-title" class="sr-only">Uma marca de presença e cuidado</h2>
+    <div class="brand-progress" aria-hidden="true"><span></span></div>
+    <div class="brand-color-layer layer-nude" aria-hidden="true"></div><div class="brand-color-layer layer-wine" aria-hidden="true"></div><div class="brand-color-layer layer-coffee" aria-hidden="true"></div>
+    <span class="brand-outline" aria-hidden="true">GABRIELA DIAS — ADVOCACIA — GABRIELA DIAS —</span>
+    <div class="brand-top"><span class="eyebrow">Uma marca. Uma presença.</span><span class="eyebrow">GD — ESTUDO DE IDENTIDADE</span></div>
+    <div class="brand-ring"><SignetRing client:idle available={ringAvailable}/></div>
+    <div class="brand-bottom"><span class="brand-color-label eyebrow"><span data-color-name>MARFIM</span><span data-color-hex>#F4EEE6</span></span><span class="ring-hint eyebrow">Arraste para sentir os detalhes</span></div>
+    <div class="brand-iris" aria-hidden="true"></div>
+    <div class="door door-left" aria-hidden="true"></div><div class="door door-right" aria-hidden="true"></div>
+  </section>
+
+  <section class="areas-section section-shell" id="atuacao" aria-labelledby="areas-title">
+    <div class="areas-heading"><span class="section-index eyebrow">(03) — ATUAÇÃO</span><h2 id="areas-title">Caminhos de<br/><em>atuação.</em></h2><p>Orientação cuidadosa nas questões<br class="desktop-only"/> que fazem parte da sua vida.</p><span class="areas-note">{site.areasNote}</span></div>
+    <AreasCarousel />
+  </section>
+
+  <section class="about-section section-shell" id="sobre" aria-labelledby="about-title">
+    <span class="section-index eyebrow">(04) — A ADVOGADA</span>
+    <div class="about-grid"><div class="about-photo"><Media src="/media/gabriela-retrato.webp" alt="Retrato de Gabriela Dias" class="about-portrait"/><div class="about-curtain" aria-hidden="true"></div><span class="photo-caption eyebrow">Gabriela Dias · {site.oab}</span></div>
+      <div class="about-copy"><h2 id="about-title">Antes do caso,<br/><em>uma pessoa.</em></h2><p>Acredito em uma advocacia que começa pela escuta. Entender a sua história é o primeiro passo para orientar com responsabilidade e tornar o caminho mais claro.</p><p>Uma relação próxima, com atenção aos detalhes e respeito ao que importa para você.</p><div class="about-credentials"><span>{site.education}</span><span>{site.biography}</span></div><Signature class="about-signature"/><a class="text-link" href="#contato">Conheça a forma de atendimento <Arrow /></a></div></div>
+  </section>
+
+  <section class="process-section section-shell" id="como-funciona" aria-labelledby="process-title">
+    <div class="process-heading"><span class="section-index eyebrow">(05) — COMO FUNCIONA</span><h2 id="process-title">Um passo<br/><em>de cada vez.</em></h2><p>Do primeiro contato ao acompanhamento,<br/>você sabe por onde estamos caminhando.</p></div>
+    <div class="process-journey"><svg class="process-route" viewBox="0 0 1000 660" preserveAspectRatio="none" aria-hidden="true"><path class="route-base" d="M50 70 C 50 70 920 20 920 180 S 80 300 80 400 S 950 530 950 590"/><path class="route-draw" d="M50 70 C 50 70 920 20 920 180 S 80 300 80 400 S 950 530 950 590"/><circle class="route-dot" r="10" cx="0" cy="0"/></svg><ol class="process-steps">{steps.map((step, index) => <li class={`process-step step-${index}`}><span class="step-number">0{index + 1}</span><div><h3>{step.title}</h3><p>{step.text}</p></div></li>)}</ol></div>
+  </section>
+
+  <section class="numbers-section" id="numeros" aria-labelledby="numbers-title">
+    <div class="numbers-heading"><span class="section-index eyebrow">(06) — EM NÚMEROS</span><h2 id="numbers-title">O que define o<br/><em>atendimento.</em></h2></div>
+    <ol class="numbers-stage">{numbers.map((item, index) => <li class="number-panel">
+      <span class="number-final">{item.value}</span>
+      <span class="number-reels" aria-hidden="true">{[...item.value].map((character) => /\d/.test(character) ? <span class="digit-window"><span class="digit-strip" data-turns={10 + Number(character)}>{Array.from({ length: 11 + Number(character) }, (_, digit) => <span>{digit % 10}</span>)}</span></span> : <span class="number-unit">{character}</span>)}</span>
+      <p class="number-caption eyebrow">{item.label}{index === numbers.length - 1 && <span class="number-period" aria-hidden="true"></span>}</p>
+      {item.confirmar && <small class="number-pending">[a confirmar]</small>}
+    </li>)}</ol>
+    <div class="numbers-footer" aria-hidden="true"><span class="numbers-counter"><span data-number-counter>01</span><span>/ 04</span></span><span class="numbers-progress"><span></span></span><span class="eyebrow">Atenção em cada detalhe.</span></div>
+    <div class="numbers-ink" aria-hidden="true"></div>
+  </section>
+
+  <section class="word-section" id="palavra" aria-labelledby="word-title">
+    <svg class="paper-texture" width="0" height="0" aria-hidden="true"><filter id="letter-grain"><feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="3" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter></svg>
+    <div class="word-heading"><span class="section-index eyebrow">(07) — PALAVRA DADA</span><h2 id="word-title">Palavra <em>dada.</em></h2><p>O que você pode esperar de mim,<br class="desktop-only"/> do primeiro contato à última decisão.</p></div>
+    <div class="letters-window"><ol class="letters-track">{commitments.map((item, index) => <li class="commitment-letter">
+      <span class="letter-number eyebrow">0{index + 1} / 05</span><h3>{item.title}</h3><p>{item.text}</p><span class="letter-signature">— G. D.<span class="guide-dot" aria-hidden="true"></span></span>
+    </li>)}</ol></div>
+    <div class="word-footer" aria-hidden="true"><span class="eyebrow">Compromissos que orientam o meu trabalho.</span><span class="word-progress"><span></span></span><span class="eyebrow">Gabriela Dias</span></div>
+  </section>
+
+  <section class="faq-section section-shell" id="duvidas" aria-labelledby="faq-title"><div class="faq-heading"><span class="eyebrow">PARA COMEÇAR COM CLAREZA</span><h2 id="faq-title">Talvez você<br/><em>queira saber.</em></h2></div><div class="faq-list">{questions.map((item, index) => <details class="faq-item"><summary><span class="faq-number">0{index + 1}</span><span>{item.question}</span><span class="faq-plus" aria-hidden="true"></span></summary><div class="faq-answer"><p>{item.answer}</p></div></details>)}</div></section>
+
+  <section class="reviews-section" id="depoimentos" aria-labelledby="reviews-title">
+    <div class="reviews-heading"><span class="section-index eyebrow">(08) — QUEM CONFIOU</span><h2 id="reviews-title">Palavras de<br/><em>quem confiou.</em></h2><p>Relatos sobre o atendimento, contados por quem viveu cada etapa.</p></div>
+    <ol class="reviews-stack">{testimonials.map((item) => <li class="review-card">
+      <span class="review-stars" role="img" aria-label="Avaliação 5 de 5">{[0, 1, 2, 3, 4].map(() => <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.6l2.47 5.3 5.8.68-4.29 3.96 1.15 5.73L10 14.4l-5.13 2.87 1.15-5.73L1.73 7.58l5.8-.68z"/></svg>)}</span>
+      <blockquote><p>“{item.text}”</p></blockquote>
+      <span class="review-author"><span class="review-name">{item.name}</span><span class="eyebrow">{item.context}</span></span>
+      {item.exemplo && <span class="review-sample">Depoimento de exemplo</span>}
+    </li>)}</ol>
+    <div class="reviews-footer" aria-hidden="true"><span class="eyebrow"><span data-review-index>01</span> / {String(testimonials.length).padStart(2, '0')}</span><span class="eyebrow desktop-only">Role para abrir as cartas</span><span class="eyebrow mobile-only">Deslize para ler</span></div>
+  </section>
+
+  <section class="contact-section section-shell" id="contato" aria-labelledby="contact-title">
+    <span class="eyebrow">O PRIMEIRO PASSO É UMA CONVERSA.</span><h2 id="contact-title">Vamos conversar<br/>sobre <em>o seu caso.</em></h2>
+    <div class="contact-scene"><div class="envelope-arrival"><div class="contact-card"><span class="eyebrow">GABRIELA DIAS · ADVOCACIA</span><p>Conte a sua história.<br/>Vamos entender o próximo passo.</p><a class="text-link" href={site.whatsappUrl || '#contact-channels'}>Iniciar uma conversa <Arrow /></a></div><Media src="/media/objetos/envelope.webp" alt="Envelope de papel marfim com lacre bordô" class="envelope-media" width={1600} height={1600}/><div class="envelope-flap" aria-hidden="true"></div><span class="contact-seal" aria-hidden="true"><Logo decorative /></span></div></div>
+    <div class="contact-channels" id="contact-channels"><div><span class="eyebrow">WHATSAPP</span>{site.whatsappUrl ? <a href={site.whatsappUrl}>{site.whatsapp}<Arrow /></a> : <span class="pending-contact">{site.whatsapp}</span>}</div><div><span class="eyebrow">E-MAIL</span>{site.emailUrl ? <a href={site.emailUrl}>{site.email}<Arrow /></a> : <span class="pending-contact">{site.email}</span>}</div><span class="contact-location">Atendimento em {site.city}<br/>{site.oab}</span></div>
+  </section>
+</Base>

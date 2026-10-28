@@ -1,0 +1,11 @@
+@import "../../brand/tokens.css";
+
+:root {
+  --paper: var(--color-marfim);
+  --ink: var(--color-cafe);
+  --wine: var(--color-bordo);
+  --metal: var(--color-champagne);
+  --nude: var(--color-nude);
+  --gutter: clamp(24px, 6vw, 100px);
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
